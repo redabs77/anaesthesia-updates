@@ -1,0 +1,617 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;PWH Anaesthesia | Feb 2026 Interactive Review&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-active { background-color: #e2e8f0; color: #0f172a; font-weight: 600; border-right: 4px solid #0284c7; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-active { border-bottom: 2px solid #0284c7; color: #0284c7; font-weight: 600; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar { width: 6px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-track { background: #f1f5f9; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb:hover { background: #94a3b8; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="flex h-screen overflow-hidden text-slate-800"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- Chosen Palette: Slate (Backgrounds/Text), Sky Blue (Primary/Interactive), Emerald (Success/KPIs), Amber (Warnings/Alerts). Clean, medical, trustworthy. --&gt;</p>
+<p class="p1">&lt;!-- Application Structure Plan: The SPA uses a dashboard structure with a persistent sidebar for navigation and a dynamic main content area. This allows staff to quickly jump to the information most relevant to their day (Clinical Updates, Safety, Analytics, or Admin). This non-linear exploration is superior to a linear document, enabling users to focus on specific operational changes, interact with performance data, or review safety protocols at their own pace. --&gt;</p>
+<p class="p1">&lt;!-- Visualization &amp; Content Choices:<span class="Apple-converted-space"> </span></p>
+<p class="p1">1. KPI Overview -&gt; Goal: Quick status -&gt; Method: Big number cards &amp; Chart.js Doughnut -&gt; Interaction: Hover tooltips -&gt; Justification: Immediate visual reinforcement of key wins (e.g., 100% Hip Fracture KPI).</p>
+<p class="p1">2. Time Audit Analytics -&gt; Goal: Compare -&gt; Method: Chart.js Horizontal Bar Chart -&gt; Interaction: Hover for exact minutes -&gt; Justification: Easily compare specialty ready times against the department average.</p>
+<p class="p1">3. SSI &amp; Workflows -&gt; Goal: Organize/Inform -&gt; Method: Interactive CSS Tabs &amp; timeline lists -&gt; Interaction: Click to switch context -&gt; Justification: Chunks dense workflow rules into digestible segments without overwhelming the screen.</p>
+<p class="p1">4. Bariatric Pilot -&gt; Goal: Change -&gt; Method: Split text/data view -&gt; Interaction: Read and absorb -&gt; Justification: Provides clear rationale (audit data) next to the new proposed clinical criteria.</p>
+<p class="p1">CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. HTML/CSS and Chart.js utilized instead. --&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;aside class="w-20 md:w-64 bg-slate-50 border-r border-slate-200 flex flex-col transition-all duration-300 z-20"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="h-16 flex items-center justify-center md:justify-start md:px-6 border-b border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="text-2xl font-bold text-sky-700"&gt;🏥 &lt;span class="hidden md:inline"&gt;PWH APP&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;nav class="flex-1 py-4 flex flex-col gap-2 px-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button data-target="dashboard" class="nav-btn nav-active flex items-center gap-3 px-3 md:px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors w-full text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-xl"&gt;📊&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="hidden md:inline"&gt;Overview&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button data-target="clinical" class="nav-btn flex items-center gap-3 px-3 md:px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors w-full text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-xl"&gt;🩺&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="hidden md:inline"&gt;Clinical Updates&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button data-target="safety" class="nav-btn flex items-center gap-3 px-3 md:px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors w-full text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-xl"&gt;🛡️&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="hidden md:inline"&gt;Safety &amp; Quality&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button data-target="analytics" class="nav-btn flex items-center gap-3 px-3 md:px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors w-full text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-xl"&gt;📈&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="hidden md:inline"&gt;Performance&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button data-target="events" class="nav-btn flex items-center gap-3 px-3 md:px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors w-full text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-xl"&gt;🎉&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="hidden md:inline"&gt;Events &amp; Team&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="p-4 border-t border-slate-200 text-xs text-slate-400 hidden md:block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Minutes: 5 Feb 2026&lt;br&gt;Dept of Anaesthesia</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/aside&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="flex-1 h-full overflow-y-auto bg-slate-100 relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-10 flex items-center px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 id="page-title" class="text-xl font-bold text-slate-800"&gt;Department of Anaesthesia, Pain and Perioperative Medicine&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="p-4 md:p-8 max-w-7xl mx-auto pb-24"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="dashboard" class="content-section block animate-fade-in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-slate-600 text-lg"&gt;Welcome to the interactive review of our &lt;b&gt; February 2026 &lt;/b&gt; staff meeting. This dashboard provides a high-level overview of our department's recent performance, key operational changes, and upcoming events. Click through the sidebar to explore specific clinical guidelines, safety protocols, and detailed analytics.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6 border-l-4 border-emerald-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-500 font-medium uppercase tracking-wider"&gt;Hip Fracture KPI&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 class="text-3xl font-bold text-emerald-600 mt-2"&gt;100%&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-2xl"&gt;🦴&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 mt-2"&gt;PWH performance over Christmas&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6 border-l-4 border-sky-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-500 font-medium uppercase tracking-wider"&gt;Avg Ready Time&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 class="text-3xl font-bold text-sky-600 mt-2"&gt;21.7 &lt;span class="text-lg"&gt;min&lt;/span&gt;&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-2xl"&gt;⏱️&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 mt-2"&gt;Based on 10,920 cases (2025)&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6 border-l-4 border-amber-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-500 font-medium uppercase tracking-wider"&gt;Upcoming Change&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 class="text-lg font-bold text-slate-700 mt-2"&gt;PAAC Day-Model&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-2xl"&gt;📅&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 mt-2"&gt;Effective 1 April 2026&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6 border-l-4 border-purple-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-500 font-medium uppercase tracking-wider"&gt;New Team Members&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 class="text-3xl font-bold text-purple-600 mt-2"&gt;+2&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-2xl"&gt;👋&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-400 mt-2"&gt;Welcome Dr Ho &amp; Dr Chan&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 lg:grid-cols-2 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2"&gt;&lt;span&gt;📢&lt;/span&gt; Critical Alerts&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li class="flex items-start gap-3 bg-amber-50 p-3 rounded-lg border border-amber-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="mt-1"&gt;⚠️&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;strong class="text-amber-800 text-sm"&gt;March 8 Phone System Update&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-xs text-amber-700 mt-1"&gt;System update from 12am – 1am on 8 March. Hospital mobiles unaffected. Admin will provide direct dial lists.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li class="flex items-start gap-3 bg-sky-50 p-3 rounded-lg border border-sky-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="mt-1"&gt;📝&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;strong class="text-sky-800 text-sm"&gt;New CMS Templates&lt;/strong&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-xs text-sky-700 mt-1"&gt;Please use new PAAC template for Anaesthetic assessment and consent in Day Ward models.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-slate-800 mb-4"&gt;KPI Comparison (Hip Fracture)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="chart-container h-[200px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;canvas id="kpiOverviewChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="clinical" class="content-section hidden animate-fade-in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-slate-600 text-lg"&gt;This section details upcoming changes to clinical workflows, out-patient clinic models, and operating theatre categorizations. Interact with the tabs below to understand how the PAAC transition, paperless initiatives, and EOT updates will impact our daily practices.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-6 flex border-b border-slate-200 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button class="clinical-tab tab-active pb-2 px-1" data-tab="paac"&gt;PAAC Transition&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button class="clinical-tab pb-2 px-1 text-slate-500 hover:text-slate-700" data-tab="eot"&gt;EOT &amp; Blood&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button class="clinical-tab pb-2 px-1 text-slate-500 hover:text-slate-700" data-tab="bariatric"&gt;Bariatric Pilot&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="tab-paac" class="clinical-content block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6 lg:p-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center gap-4 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-sky-100 p-3 rounded-full text-2xl"&gt;🏥&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h2 class="text-xl font-bold"&gt;PAAC Day-Patient Model&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sky-700 font-medium"&gt;Go-Live: 1 April 2026&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-600 mb-4"&gt;As mandated by COC(ANA), the Pre-Anaesthetic Assessment Clinic is transitioning from Outpatient to a Day-patient model to align with best practices and improve same-day coordination.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;ul class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;li class="flex items-start gap-2 text-sm text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span class="text-emerald-500"&gt;✔️&lt;/span&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;CMS Action: Select &lt;strong&gt;"Discharge Summary"&lt;/strong&gt;.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;li class="flex items-start gap-2 text-sm text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span class="text-emerald-500"&gt;✔️&lt;/span&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;Template: Use &lt;strong&gt;PAAC new 2026 version&lt;/strong&gt;.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;li class="flex items-start gap-2 text-sm text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span class="text-emerald-500"&gt;✔️&lt;/span&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;Physiotherapy: Arrange in-patient physio referral for same afternoon consultation.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;li class="flex items-start gap-2 text-sm text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span class="text-emerald-500"&gt;✔️&lt;/span&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;Medications: Patients should bring usual meds. Can prescribe in IPMOE if forgotten.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-slate-50 rounded-lg p-5 border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-800 mb-2"&gt;🚨 Clinical Incidents in Day Ward&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-600 mb-3"&gt;For unusual incidents (e.g., symptomatic severe hypertension BP &gt; 200, chest pain):&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex gap-2 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded"&gt;Urgent&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm text-slate-700"&gt;Contact medical team by phone immediately.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded"&gt;Non-Urgent&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm text-slate-700"&gt;Contact parent team to arrange admission for management.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="tab-eot" class="clinical-content hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-lg mb-4 flex items-center gap-2"&gt;&lt;span&gt;⏱️&lt;/span&gt; EOT Recategorization&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600 mb-4"&gt;Implementing Q2 2026. Surgeons can upgrade/downgrade based on patient condition.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="font-bold text-red-700"&gt;Immediate&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm bg-white px-2 py-1 rounded shadow-sm text-red-600"&gt;Within 1 hour&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex items-center justify-between p-3 bg-amber-50 rounded-lg border border-amber-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="font-bold text-amber-700"&gt;Urgent&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm bg-white px-2 py-1 rounded shadow-sm text-amber-600"&gt;Within 8 hours&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex items-center justify-between p-3 bg-emerald-50 rounded-lg border border-emerald-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="font-bold text-emerald-700"&gt;Semi-urgent&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm bg-white px-2 py-1 rounded shadow-sm text-emerald-600"&gt;Within 24 hours&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="mt-4 pt-4 border-t border-slate-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-sm text-slate-700"&gt;&lt;strong&gt;Note:&lt;/strong&gt; Crash Caesarean Sessions will be renamed &lt;span class="font-bold text-sky-600"&gt;"ICS"&lt;/span&gt; (Immediate Caesarean Sessions) - target within 30 minutes.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-lg mb-4 flex items-center gap-2"&gt;&lt;span&gt;🩸&lt;/span&gt; Paperless Blood Product&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600 mb-4"&gt;Rolling out HA-wide tentatively 2Q 2026.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-slate-50 p-4 rounded-lg border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-700 mb-3"&gt;&lt;strong&gt;Challenge Identified:&lt;/strong&gt; Scanning each bag during massive transfusion in the OT setting is time-consuming and may delay care.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-700"&gt;&lt;strong&gt;Action:&lt;/strong&gt; Dr Albert Chan and Dr Vivian Lau are following up with the Blood Transfusion Committee and COC(ANA) to streamline this workflow.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="tab-bariatric" class="clinical-content hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col md:flex-row gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 class="font-bold text-xl mb-4"&gt;Bariatric Surgery ICU Audit &amp; Proposal&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-600 mb-4 text-sm"&gt;Audit of 82 cases (Jan 2023 - Nov 2025) reviewed. 10 admitted to ICU. Findings showed no significant post-op respiratory complications; most stayed 1 day with no re-intubation.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="bg-sky-50 rounded-lg p-5 border border-sky-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h4 class="font-bold text-sky-800 mb-2"&gt;Proposed New Criteria (Pilot Study)&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-sm text-sky-900 mb-3"&gt;Aiming to optimize ICU bed utilization, as bariatric surgery is low priority for elective ICU beds.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;ul class="space-y-2 text-sm text-sky-800 list-disc pl-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;Raise direct ICU admission threshold to &lt;strong&gt;BMI ≥ 50&lt;/strong&gt; (with major comorbidities or severe OSA without CPAP).&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;li&gt;Pilot: Patients BMI 50-55 managed in ARCU, step down to HDU, with ICU bed on &lt;strong&gt;standby&lt;/strong&gt;.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500 mt-4 italic"&gt;* Participation in the pilot is voluntary pending cancellation data review.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-full md:w-64 flex flex-col gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="bg-slate-50 p-4 rounded-lg text-center border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="block text-3xl font-bold text-slate-700"&gt;82&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-xs text-slate-500 uppercase tracking-wide"&gt;Total Cases Audited&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="bg-slate-50 p-4 rounded-lg text-center border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="block text-3xl font-bold text-slate-700"&gt;45&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-xs text-slate-500 uppercase tracking-wide"&gt;Median BMI (ICU group)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="bg-slate-50 p-4 rounded-lg text-center border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="block text-3xl font-bold text-slate-700"&gt;100%&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-xs text-slate-500 uppercase tracking-wide"&gt;Had OSA (ICU group)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="safety" class="content-section hidden animate-fade-in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-slate-600 text-lg"&gt;Patient safety is our primary focus. Review the updated Surgical Site Infection (SSI) protocols, recent RCA learnings regarding surgical counting, and reminders for regional anaesthesia and M&amp;M reporting criteria.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6 border-t-4 border-emerald-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-lg mb-4 text-emerald-800"&gt;Surgical Site Infection (SSI) Updates&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-slate-600 mb-4"&gt;New ICN guidelines on induction antibiotics to achieve bactericidal concentration.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="relative pl-6 border-l-2 border-emerald-200 space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="absolute -left-[29px] top-1 h-4 w-4 rounded-full bg-emerald-500 border-2 border-white"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-sm text-slate-800"&gt;Initial Dose&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-600 mt-1"&gt;Administer within &lt;strong&gt;30 minutes before incision&lt;/strong&gt;. Must be infused completely prior to incision.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="absolute -left-[29px] top-1 h-4 w-4 rounded-full bg-emerald-500 border-2 border-white"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-sm text-slate-800"&gt;Active Infection&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-600 mt-1"&gt;If current agent covers prophylaxis: extra dose within 30 mins. If insufficient: add coverage. Consider Vancomycin for MRSA.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="absolute -left-[29px] top-1 h-4 w-4 rounded-full bg-emerald-500 border-2 border-white"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-sm text-slate-800"&gt;Redosing Rules&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-600 mt-1"&gt;Required if excessive blood loss (&lt;strong&gt;&gt;1,500 ml&lt;/strong&gt;) OR at interval of &lt;strong&gt;2x half-life&lt;/strong&gt; (e.g., Augmentin half-life 1hr = redose every 2-3hrs, max 3 doses).&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs font-bold text-red-500 mt-4"&gt;* Document in notes if surgical team insists on NOT providing induction antibiotics.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6 border-t-4 border-amber-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-lg mb-4 text-amber-800"&gt;Sentinel Events: Retained Materials RCA&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-slate-600 mb-4"&gt;Five recent HA-wide events identified unfamiliarity and interruptions as factors. Enhanced protocols roll out in MAR 2026.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-amber-50 rounded-lg p-4 border border-amber-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-amber-900 mb-3 text-sm"&gt;Enhanced Counting Culture&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;ul class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;li class="flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-amber-600 font-bold shadow-sm"&gt;1&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm text-amber-900 font-medium"&gt;Close loop communication in packing/removal&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;li class="flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-amber-600 font-bold shadow-sm"&gt;2&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm text-amber-900 font-medium"&gt;Pre-emptive preparation before closing&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;li class="flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-amber-600 font-bold shadow-sm"&gt;3&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm text-amber-900 font-medium"&gt;Confirmation on packing removal before closing&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;li class="flex items-center gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-amber-600 font-bold shadow-sm"&gt;4&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-sm text-amber-900 font-medium"&gt;No assumption in counting&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-slate-800 mb-3"&gt;💉 Regional Anaesthesia&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="space-y-2 text-sm text-slate-700 list-disc pl-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;State side/location/type of block clearly (upper vs lower limb).&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;&lt;strong class="text-red-600"&gt;Stop JUST before you block.&lt;/strong&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Use procedure rooms to facilitate turnover.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-slate-800 mb-3"&gt;📋 M&amp;M Reporting&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-slate-500 mb-2"&gt;QR codes available at back of ACIS computers.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="space-y-1 text-xs text-slate-700 list-disc pl-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Perioperative death (within 48 hrs)&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Code Red/Blue/Arrest on OT floor&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Arrest during peripheral anaesthesia&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Unanticipated ICU admissions&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Morbidity/mortality warranting consult&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li&gt;Surgery aborted after anaesthesia given&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="analytics" class="content-section hidden animate-fade-in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-slate-600 text-lg"&gt;Explore our operational efficiency data from the 2025 Anaesthetic Time Audit. The charts visualize average ready times across different specialties, highlighting areas of high performance and identifying factors (like complex regional blocks or invasive lines) that influence turnover.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="glass-card rounded-xl p-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-xl text-slate-800"&gt;Anaesthetic Time Audit (2025)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-500"&gt;Based on 10,920 elective and emergency cases in Main OT&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex gap-4 mt-4 md:mt-0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-center px-4 border-r border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="block text-2xl font-bold text-sky-600"&gt;21.7m&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs text-slate-500"&gt;Avg Ready Time&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-center px-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="block text-2xl font-bold text-slate-700"&gt;34.2m&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs text-slate-500"&gt;Mean Total Time&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="chart-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;canvas id="readyTimeChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xs text-slate-500 mt-4 text-center"&gt;Note: ORT has longest ready time likely due to RA/SA/EA/CSE performed in procedure rooms between cases. Higher ASA grades and invasive lines increase time.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="glass-card rounded-xl p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-lg text-slate-800 mb-4"&gt;Standardized ACIS Timestamps&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-center p-3 bg-slate-50 rounded border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-bold text-sm text-slate-700"&gt;OR IN&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-slate-600"&gt;Patient enters theatre&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-center p-3 bg-sky-50 rounded border border-sky-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-bold text-sm text-sky-800"&gt;ANAES START&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-sky-700"&gt;Anaesthesia sign-in&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-center p-3 bg-slate-50 rounded border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-bold text-sm text-slate-700"&gt;SURGERY START&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-slate-600"&gt;Time out with teams&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-center p-3 bg-slate-50 rounded border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-bold text-sm text-slate-700"&gt;SURGERY END&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-slate-600"&gt;All stitches/drains done&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-center p-3 bg-sky-50 rounded border border-sky-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-bold text-sm text-sky-800"&gt;ANAES END&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-sky-700"&gt;Patient ready to leave OR&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-center p-3 bg-slate-50 rounded border border-slate-200"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-bold text-sm text-slate-700"&gt;OR OUT&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-sm text-slate-600"&gt;Patient leaves OR&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="events" class="content-section hidden animate-fade-in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-slate-600 text-lg"&gt;Stay connected with our department community. Welcome our newest colleagues and find details about our upcoming social gatherings to celebrate our collective hard work.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-8 text-center bg-gradient-to-b from-white to-slate-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-6xl mb-4"&gt;👋&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-2xl text-slate-800 mb-2"&gt;Welcome to the Team!&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-slate-600 mb-6"&gt;We are thrilled to welcome our new Anaesthesia residents who joined us in early 2026.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-center gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full font-medium"&gt;Dr. Vivian Ho&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-sky-100 text-sky-800 px-4 py-2 rounded-full font-medium"&gt;Dr. Nathan Chan&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-slate-500 mt-6"&gt;Also welcoming our new rotation trainees, ICU trainees, and Pain training fellow!&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="glass-card rounded-xl p-8 text-center bg-gradient-to-b from-white to-rose-50 border-rose-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-6xl mb-4"&gt;🌸&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-bold text-2xl text-rose-800 mb-2"&gt;Spring Dinner 2026&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-slate-600 mb-6"&gt;Thanks to support from CUHK, we had a great time at the Spring Dinner!&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const navBtns = document.querySelectorAll('.nav-btn');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const sections = document.querySelectorAll('.content-section');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const pageTitle = document.getElementById('page-title');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const titles = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'dashboard': 'Overview',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'clinical': 'Clinical &amp; Workflow Updates',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'safety': 'Quality &amp; Safety Protocols',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'analytics': 'Performance &amp; Time Analytics',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'events': 'Team &amp; Events'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>navBtns.forEach(btn =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>btn.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const target = btn.getAttribute('data-target');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>navBtns.forEach(b =&gt; b.classList.remove('nav-active'));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.add('nav-active');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>sections.forEach(s =&gt; s.classList.add('hidden'));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById(target).classList.remove('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>pageTitle.textContent = titles[target];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(target === 'analytics' &amp;&amp; !window.analyticsChartRendered) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>renderAnalyticsChart();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>window.analyticsChartRendered = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const clinicalTabs = document.querySelectorAll('.clinical-tab');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const clinicalContents = document.querySelectorAll('.clinical-content');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>clinicalTabs.forEach(tab =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tab.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const target = tab.getAttribute('data-tab');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>clinicalTabs.forEach(t =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>t.classList.remove('tab-active', 'text-sky-600');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>t.classList.add('text-slate-500');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tab.classList.add('tab-active');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tab.classList.remove('text-slate-500');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>clinicalContents.forEach(c =&gt; c.classList.add('hidden'));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('tab-' + target).classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ctxKpi = document.getElementById('kpiOverviewChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>new Chart(ctxKpi, {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>labels: ['PWH', 'NTEC Overall', 'HA Overall'],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>label: 'Hip Fracture KPI (%)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>data: [100, 86.7, 56.3],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>backgroundColor: [</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'rgba(16, 185, 129, 0.8)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'rgba(14, 165, 233, 0.6)',<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'rgba(148, 163, 184, 0.6)'</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>borderColor: [</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'rgb(16, 185, 129)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'rgb(14, 165, 233)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'rgb(148, 163, 184)'</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>borderWidth: 1,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>borderRadius: 4</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>maintainAspectRatio: false,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>indexAxis: 'y',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>x: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>beginAtZero: true,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>max: 100,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grid: { display: false }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>grid: { display: false }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>legend: { display: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tooltip: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>callbacks: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>label: function(context) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>return context.raw + '%';</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderAnalyticsChart() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ctxTime = document.getElementById('readyTimeChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(ctxTime, {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['ORT', 'T4', 'T1', 'NS', 'Dept Average'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Anaesthesia Ready Time (mins)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: [25.3, 24.4, 24.3, 23.2, 21.7],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: [</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'rgba(245, 158, 11, 0.7)',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'rgba(14, 165, 233, 0.7)',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'rgba(14, 165, 233, 0.7)',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'rgba(14, 165, 233, 0.7)',</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>'rgba(15, 23, 42, 0.8)'</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderWidth: 0,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderRadius: 6</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>maintainAspectRatio: false,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>beginAtZero: true,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>title: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>display: true,</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>text: 'Minutes'</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>x: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>grid: { display: false }</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>legend: { display: false },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tooltip: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>callbacks: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>label: function(context) {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>return context.raw + ' mins';</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
